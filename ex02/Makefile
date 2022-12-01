@@ -7,7 +7,8 @@ CPPFLAGS	= -MMD
 
 SRCS		=	main.cpp\
 				Bureaucrat.cpp\
-				Form.cpp
+				AForm.cpp\
+				ShrubberyCreationForm.cpp
 
 
 OBJS = $(SRCS:.cpp=.o)

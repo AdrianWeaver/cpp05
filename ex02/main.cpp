@@ -6,57 +6,54 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:37:48 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 10:25:43 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 14:19:08 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main(void)
 {
-	{
-		Bureaucrat	toto("Toto", 50);
-		Form		poleEmploi("Pole emploi", 150, 50);
-		std::cout << poleEmploi << std::endl;
-		poleEmploi.beSigned(toto);
-		std::cout << poleEmploi << std::endl;
-	}
+	std::cout << "Trying to execute a form that has not been signed:" << std::endl;
 	{
 		try
 		{
-			Bureaucrat	toto("Toto", 50);
-			Form		poleEmploi("Pole emploi", 152, 50);
-			std::cout << poleEmploi << std::endl;
-			poleEmploi.beSigned(toto);
-			std::cout << poleEmploi << std::endl;
+			Bureaucrat			papa("Daddy", 10);
+			ShrubberyCreationForm wesh("jardin");
+			papa.executeForm(wesh);
 		}
-		catch (Form::GradeTooHighException &e)
+		catch (AForm::GradeTooHighException &e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << "caught: " << e.what() << std::endl;
 		}
-		catch (Form::GradeTooLowException &e)
+		catch (AForm::GradeTooLowException &e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << "caught: " << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl << "Trying to execute a signed form:" << std::endl;
 	{
 		try
 		{
-			Bureaucrat	toto("Toto", 150);
-			Form		poleEmploi("Pole emploi", 1, 50);
-			std::cout << poleEmploi << std::endl;
-			poleEmploi.beSigned(toto);
-			std::cout << poleEmploi << std::endl;
+			Bureaucrat			papa("Daddy", 10);
+			ShrubberyCreationForm wesh("jardin");
+			std::cout << "grade exe: " << wesh.getGradeRequiredToExe()
+				<< "grade sign: " << wesh.getGradeRequired() << std::endl;
+			wesh.beSigned(papa);
+			papa.executeForm(wesh);
 		}
-		catch (Form::GradeTooHighException &e)
+		catch (AForm::GradeTooHighException &e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << "caught: " << e.what() << std::endl;
 		}
-		catch (Form::GradeTooLowException &e)
+		catch (AForm::GradeTooLowException &e)
 		{
-			std::cout << e.what() << std::endl;
+			std::cout << "caught: " << e.what() << std::endl;
 		}
+	}
+	{
 	}
 	return (0);
 }

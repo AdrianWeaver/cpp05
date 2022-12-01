@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:57:54 by aweaver           #+#    #+#             */
-/*   Updated: 2022/11/30 18:31:59 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:46:36 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ const char* Bureaucrat::GradeTooLowException::what(void) const throw()
 	return ("Grade is too low!");
 }
 
-void	Bureaucrat::signForm(Form & toSign) const
+void	Bureaucrat::signAForm(AForm & toSign) const
 {
 	if (toSign.getSigned() == 1)
 		std::cout << this->_name << " signed " << toSign.getName() << std::endl;
@@ -101,8 +101,29 @@ void	Bureaucrat::signForm(Form & toSign) const
 			<< " requires " << toSign.getGradeRequired() << "." << std::endl;
 }
 
+void	Bureaucrat::executeForm(AForm const& form)
+{
+	if (form.execute(*this) == 0)
+	{
+		std::cout << this->_name << " executed form " << form.getName() << std::endl;
+		form.action(*this);
+	}
+	else if (form.getSigned() == 0)
+	{
+		std::cout << this->_name << " tried to execute form " << form.getName() 
+			<< "but the form is not signed." << std::endl;
+	}
+	else
+	{
+		std::cout << this->_name << " tried to execute form " << form.getName() 
+			<< "but is not graded enough for that." << std::endl;
+	}
+}
+
+// stream overload
 std::ostream&	operator<<(std::ostream & flow, Bureaucrat const& rhs)
 {
 	flow << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
 	return (flow);
 }
+

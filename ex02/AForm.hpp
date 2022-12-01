@@ -6,26 +6,30 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:00:59 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 10:51:45 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:46:41 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 
 class AForm
 {
 	public:
-		AForm & operator=(AForm const& rhs);
+		virtual ~AForm(void);
 
+		// Functions
 		void				beSigned(Bureaucrat const& adm);
 		std::string const&	getName(void) const;
 		const bool&			getSigned(void) const;
 		const int&			getGradeRequired(void) const;
 		const int&			getGradeRequiredToExe(void) const;
+		int					execute(Bureaucrat const& executor) const;
+		virtual void		action(Bureaucrat const& executor) const;
 
+		// Exception classes
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -38,15 +42,18 @@ class AForm
 				const char *what(void) const throw();
 		};
 	protected:
+		// Constructors
 		AForm(void);
-		~AForm(void);
 		AForm(AForm const& source);
 		AForm(std::string name, int gradeRequired, int gradeRequiredForExecution);
-	private:
+		AForm & operator=(AForm const& rhs);
+
+		// Variables
 		const std::string	_name;
 		bool				_signed;
 		const int			_gradeRequired;
 		const int			_gradeRequiredForExecution;
+	private:
 };
 
 std::ostream & operator<<(std::ostream & flow, AForm const& rhs);

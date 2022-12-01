@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 10:51:49 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:54:12 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,18 @@ void	AForm::beSigned(Bureaucrat const& admin)
 	else
 		throw AForm::GradeTooLowException();
 	admin.signAForm(*this);
+}
+
+int	AForm::execute(Bureaucrat const& executor) const
+{
+	if (executor.getGrade() <= this->_gradeRequiredForExecution && this->_signed == 1)
+		return (0);
+	else
+		throw AForm::GradeTooLowException();
+	return (1);
+}
+
+void	AForm::action(Bureaucrat const& executor) const
+{
+	std::cout << "Default AForm action called by " << executor.getName() << std::endl;
 }

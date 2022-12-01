@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:57:53 by aweaver           #+#    #+#             */
-/*   Updated: 2022/11/30 18:46:09 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:40:54 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 
 # include <iostream>
 # include <exception>
+class AForm;
 
-class Form;
 class Bureaucrat
 {
 	public:
+		// Constructors & Destructors
 		Bureaucrat(void);
 		~Bureaucrat(void);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(Bureaucrat const& source);
 		Bureaucrat & operator=(Bureaucrat const& rhs);
 
+		// Functions
 		std::string const&	getName(void) const;
 		int const&			getGrade(void) const;
 		void				increaseGrade(void);
 		void				decreaseGrade(void);
-		void				signForm(Form & toSign) const;
+		void				signAForm(AForm & toSign) const;
+		void				executeForm(AForm const& form);
 
 		class GradeTooHighException : public std::exception
 		{
@@ -51,5 +54,5 @@ class Bureaucrat
 
 std::ostream&	operator<<(std::ostream & flow, Bureaucrat const& rhs);
 
-# include "Form.hpp"
+# include "AForm.hpp"
 #endif
