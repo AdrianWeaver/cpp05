@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:00:59 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 15:43:44 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:03:38 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class AForm
 		const bool&			getSigned(void) const;
 		const int&			getGradeRequired(void) const;
 		const int&			getGradeRequiredToExe(void) const;
-		int					execute(Bureaucrat const& executor) const;
+		void				execute(Bureaucrat const& executor) const;
 		virtual void		action(Bureaucrat const& executor) const;
 
 		// Exception classes
@@ -37,6 +37,11 @@ class AForm
 		};
 
 		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what(void) const throw();
+		};
+		class FormNotSignedException : public std::exception
 		{
 			public:
 				const char *what(void) const throw();

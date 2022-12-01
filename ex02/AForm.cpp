@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:01:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 13:54:12 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 16:03:37 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,12 @@ const char* AForm::GradeTooHighException::what(void) const throw()
 
 const char* AForm::GradeTooLowException::what(void) const throw()
 {
-	return ("Grade is too low");
+	return ("Grade is too low!");
+}
+
+const char* AForm::FormNotSignedException::what(void) const throw()
+{
+	return ("Form is not signed!");
 }
 
 void	AForm::beSigned(Bureaucrat const& admin)
@@ -114,13 +119,17 @@ void	AForm::beSigned(Bureaucrat const& admin)
 	admin.signAForm(*this);
 }
 
-int	AForm::execute(Bureaucrat const& executor) const
+void	AForm::execute(Bureaucrat const& executor) const
 {
-	if (executor.getGrade() <= this->_gradeRequiredForExecution && this->_signed == 1)
-		return (0);
+	if (executor.getGrade() <= this->_gradeRequiredForExecution)
+	{
+		if (this->_signed == 0)
+			throw AForm::FormNotSignedException();
+		this->action(executor);
+		return ;
+	}
 	else
 		throw AForm::GradeTooLowException();
-	return (1);
 }
 
 void	AForm::action(Bureaucrat const& executor) const
