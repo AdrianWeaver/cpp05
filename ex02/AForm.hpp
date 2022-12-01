@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 15:00:59 by aweaver           #+#    #+#             */
-/*   Updated: 2022/11/30 18:31:58 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 10:51:45 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 
 #include "Bureaucrat.hpp"
 
-class Form
+class AForm
 {
 	public:
-		Form(void);
-		~Form(void);
-		Form(Form const& source);
-		Form(std::string name, int gradeRequired, int gradeRequiredForExecution);
-		Form & operator=(Form const& rhs);
+		AForm & operator=(AForm const& rhs);
 
 		void				beSigned(Bureaucrat const& adm);
 		std::string const&	getName(void) const;
@@ -42,6 +38,10 @@ class Form
 				const char *what(void) const throw();
 		};
 	protected:
+		AForm(void);
+		~AForm(void);
+		AForm(AForm const& source);
+		AForm(std::string name, int gradeRequired, int gradeRequiredForExecution);
 	private:
 		const std::string	_name;
 		bool				_signed;
@@ -49,6 +49,6 @@ class Form
 		const int			_gradeRequiredForExecution;
 };
 
-std::ostream & operator<<(std::ostream & flow, Form const& rhs);
+std::ostream & operator<<(std::ostream & flow, AForm const& rhs);
 
 #endif
