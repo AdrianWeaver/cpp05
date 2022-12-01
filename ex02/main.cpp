@@ -6,13 +6,15 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:37:48 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 14:19:08 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 15:47:42 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main(void)
 {
@@ -39,8 +41,6 @@ int main(void)
 		{
 			Bureaucrat			papa("Daddy", 10);
 			ShrubberyCreationForm wesh("jardin");
-			std::cout << "grade exe: " << wesh.getGradeRequiredToExe()
-				<< "grade sign: " << wesh.getGradeRequired() << std::endl;
 			wesh.beSigned(papa);
 			papa.executeForm(wesh);
 		}
@@ -54,6 +54,39 @@ int main(void)
 		}
 	}
 	{
+		try
+		{
+			Bureaucrat				afaure("Auguste", 10);
+			Bureaucrat				aweaver("aweaver", 42);
+			RobotomyRequestForm		adventofcode("adventofcode", "aweaver");
+			adventofcode.beSigned(afaure);
+			aweaver.executeForm(adventofcode);
+		}
+		catch (AForm::GradeTooHighException &e)
+		{
+			std::cout << "caught: " << e.what() << std::endl;
+		}
+		catch (AForm::GradeTooLowException &e)
+		{
+			std::cout << "caught: " << e.what() << std::endl;
+		}
+	}
+	{
+		try
+		{
+			Bureaucrat				calamity("calamity the almighty", 1);
+			PresidentialPardonForm	immunity("cookie", "aweaver");
+			immunity.beSigned(calamity);
+			calamity.executeForm(immunity);
+		}
+		catch (AForm::GradeTooHighException &e)
+		{
+			std::cout << "caught: " << e.what() << std::endl;
+		}
+		catch (AForm::GradeTooLowException &e)
+		{
+			std::cout << "caught: " << e.what() << std::endl;
+		}
 	}
 	return (0);
 }
