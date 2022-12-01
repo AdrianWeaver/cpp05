@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 09:37:48 by aweaver           #+#    #+#             */
-/*   Updated: 2022/11/30 18:41:18 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/01 10:25:43 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int main(void)
 		}
 		catch (Form::GradeTooHighException &e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 		catch (Form::GradeTooLowException &e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 	}
 	{
@@ -51,11 +51,11 @@ int main(void)
 		}
 		catch (Form::GradeTooHighException &e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 		catch (Form::GradeTooLowException &e)
 		{
-			std::cout << e.what();
+			std::cout << e.what() << std::endl;
 		}
 	}
 	return (0);
