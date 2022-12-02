@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:29:14 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 17:04:46 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:33:05 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ Intern & Intern::operator=(Intern const& rhs)
 	return (*this);
 }
 
-const char* Intern::NewFailed::what(void) const throw()
-{
-	return ("New failed!");
-}
-
-const char* Intern::WrongForm::what(void) const throw()
+const char* Intern::WrongFormException::what(void) const throw()
 {
 	return ("This form name does not exist!");
 }
@@ -75,7 +70,7 @@ AForm*	Intern::filter(std::string formName, std::string formTarget)
 			ret = new PresidentialPardonForm(formTarget);
 			break ;
 		default:
-			throw Intern::WrongForm();
-		return (ret);
+			throw Intern::WrongFormException();
 	}
+	return (ret);
 }

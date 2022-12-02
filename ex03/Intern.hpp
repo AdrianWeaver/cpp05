@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:29:13 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/01 17:04:47 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:32:58 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ class Intern
 		// Functions
 		AForm*		makeForm(std::string formName, std::string formTarget);
 
-		class NewFailed : public std::exception
-		{
-			public:
-				const char*	what(void) const throw();
-		};
-		class WrongForm : public std::exception
+		class WrongFormException : public std::exception
 		{
 			public:
 				const char*	what(void) const throw();
