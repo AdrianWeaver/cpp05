@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:29:14 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/02 11:33:05 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/02 11:52:14 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,15 @@ AForm*	Intern::filter(std::string formName, std::string formTarget)
 	{
 		case 0:
 			ret = new RobotomyRequestForm(formTarget);
+			std::cout << "Intern creates " << formName << "." << std::endl;
 			break;
 		case 1:
 			ret = new ShrubberyCreationForm(formTarget);
+			std::cout << "Intern creates " << formName << "." << std::endl;
 			break ;
 		case 2:
 			ret = new PresidentialPardonForm(formTarget);
+			std::cout << "Intern creates " << formName << "." << std::endl;
 			break ;
 		default:
 			throw Intern::WrongFormException();
