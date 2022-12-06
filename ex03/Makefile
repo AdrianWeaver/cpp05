@@ -36,6 +36,9 @@ re: fclean
 test:	$(NAME)
 		./$(NAME)
 
+vtest:	$(NAME)
+		valgrind --leak-check=full ./$(NAME)
+
 -include $(DEPS)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test vtest
